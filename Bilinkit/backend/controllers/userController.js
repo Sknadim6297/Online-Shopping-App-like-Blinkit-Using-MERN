@@ -1,8 +1,8 @@
-const userModel = require("../models/userModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const sendEmail = require("../config/sendEmail");
-const verifyEmailTemplate = require("../utils/VerifyEmailTemplates");
+import userModel from "../models/userModel.js";
+import bcrypt from "bcryptjs";
+// import jwt from "jsonwebtoken";
+// import sendEmail from "../config/sendEmail.js";
+// import verifyEmailTemplate from "../utils/VerifyEmailTemplates.js";
 
 export async function registerUser(req, res) {
   try {
@@ -33,34 +33,41 @@ export async function registerUser(req, res) {
     };
     const newUser = new userModel(payload);
     const save = await newUser.save();
+    // try {
+    //   const emailSend = await sendEmail({
+    //     sendTo: email,
+    //     subject: "Verify email from Blinkit",
+    //     html: verifyEmailTemplate({
+    //       name,
+    //       url: VerifyEmailUrl,
+    //     }),
+    //   });
+    // } catch (err) {
+    //   console.error("Error sending email:", err);
+    //   return res.status(500).json({
+    //     message: "Failed to send email",
+    //     error: true,
+    //     success: false,
+    //   });
+    // }
+    // const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save?._id}`;
 
-    const sendEmail = await sendEmail({
-      sendTo: email,
-      subject: "Verify email from Blinkit",
-      html: verifyEmailTemplate({
-        name,
-        url: verifyEmailTemplate,
-      }),
-    });
+    // const verifyEamil = await sendEmail({
+    //   sendTo: email,
+    //   subject: "Verify email from binkeyit",
+    //   html: verifyEmailTemplate({
+    //     name,
+    //     url: VerifyEmailUrl,
+    //   }),
+    // });
 
-    const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save?._id}`;
-
-    const verifyEamil = await sendEmail({
-      sendTo: email,
-      subject: "Verify email from binkeyit",
-      html: verifyEmailTemplate({
-        name,
-        url: VerifyEmailUrl,
-      }),
-    });
-
-    return response.json({
+    return res.json({
       message: "User registered successfully",
       success: true,
       error: false,
     });
   } catch (err) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: err.message || err,
       error: true,
       success: false,

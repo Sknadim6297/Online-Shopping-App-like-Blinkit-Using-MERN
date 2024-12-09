@@ -1,10 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
-const helmet = require("helmet");
-const connectDB = require("./config/connectDB");
-const userRouter = require("./routes/userRoute");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
+import helmet from "helmet";
+import connectDB from "./config/connectDB.js";
+import userRouter from "./routes/userRoute.js";
 
 const app = express();
 const port = 8000 || process.env.PORT;
@@ -12,7 +12,7 @@ const port = 8000 || process.env.PORT;
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true,  
+    credentials: true,
   })
 );
 connectDB();

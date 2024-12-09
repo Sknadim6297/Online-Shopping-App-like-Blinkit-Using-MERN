@@ -1,5 +1,5 @@
-const { Resend } = require("resend");
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
+import { Resend } from "resend";
 
 dotenv.config();
 
@@ -25,3 +25,5 @@ const sendEmail = async ({ name, sendTo, subject, html }) => {
     console.log(error);
   }
 };
+
+export default sendEmail;

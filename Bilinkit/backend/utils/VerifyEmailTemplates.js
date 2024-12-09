@@ -7,3 +7,5 @@ const verifyEmailTemplates = ({ name, url }) => {
     <p>If you did not sign up for Bilinkit, please ignore this email.</p>
     `;
 };
+
+export default verifyEmailTemplates;
